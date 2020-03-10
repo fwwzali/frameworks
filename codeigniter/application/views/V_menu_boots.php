@@ -135,7 +135,8 @@
 
     <main role="main" class="col-md-9 ml-sm-auto col-lg-10 px-4">
       <br><br><br>
-
+      <a href="<?php echo base_url()?>index.php/Kantin/create_menu" class="btn btn-primary" >+ Menu Baru </a>
+      <?php echo $this->session->flashdata('msg'); ?>
       <h2><?php echo $judul; ?></h2>
       <div class="table-responsive">
         <table class="table table-striped table-sm">

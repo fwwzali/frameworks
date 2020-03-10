@@ -11,6 +11,7 @@ class Kantin extends CI_Controller
 	{
 		parent::__construct();
 		$this->load->model('M_menu','menu');
+		$this->load->helper('kantin');
 	}
 
 	public function index()
@@ -18,6 +19,15 @@ class Kantin extends CI_Controller
 		$data['judul'] = "Daftar Warung";
 		$data['warung'] = $this->menu->get_warung();
 		$this->load->view('V_listKantin',$data);
+	}
+
+	public function get_allKantin()
+	{
+		$data_menu = $this->menu->get_menu();
+		$data['menu'] = $data_menu;
+		$data['judul'] = "Menu Kantin UPN Jatim";
+		//print_r($data_menu);
+		$this->load->view('V_menu_boots',$data);
 	}
 
 	public function create_menu()
@@ -39,7 +49,7 @@ class Kantin extends CI_Controller
 			}
 
 			//redirect
-			redirect(base_url().'index.php/Kantin/create_menu');
+			redirect(base_url().'index.php/Kantin/get_allKantin');
 
 
 
