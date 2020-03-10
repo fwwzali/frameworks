@@ -18,6 +18,22 @@ class M_menu extends CI_Model
 		return $result->result();
 	}
 
+	public function get_menu_specific($k_menu)
+	{
+		//RAW SQL
+		// $query = "SELECT * from menu WHERE k_menu = ?";
+		// $result = $this->db->query($query, array($k_menu));
+		// return $result->result();
+
+		//QUERY BUILDER
+		// return $this->db->get_where('menu', array('k_menu'=> $k_menu))->result();
+
+		//equivalent
+		$result = $this->db->get_where('menu', array('k_menu'=> $k_menu));
+		return $result->result();
+
+	}
+
 	public function get_warung()
 	{
 		$result = $this->db->select('nama_warung')
@@ -40,6 +56,27 @@ class M_menu extends CI_Model
 		$this->db->insert('menu',$data);
 
 		//check status query
+		return $this->db->affected_rows();
+	}
+
+	public function update($data)
+	{
+		$query = "UPDATE menu
+				SET nama_warung = ?,
+					menu = ?,
+					harga = ?
+				WHERE k_menu = ?";
+
+		$this->db->query($query,array($data['nama_warung'],$data['menu'],$data['harga'],$data['k_menu']));
+
+		return $this->db->affected_rows();
+	}
+
+	public function delete($k_menu)
+	{
+		$this->db->where('k_menu',$k_menu);
+		$this->db->delete('menu');
+
 		return $this->db->affected_rows();
 	}
 }

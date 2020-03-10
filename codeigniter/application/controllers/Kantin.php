@@ -30,6 +30,7 @@ class Kantin extends CI_Controller
 		$this->load->view('V_menu_boots',$data);
 	}
 
+
 	public function create_menu()
 	{
 		if ($this->input->post()) {
@@ -59,5 +60,49 @@ class Kantin extends CI_Controller
 			$data['judul'] = "Buat Menu Baru";
 			$this->load->view('kantin/v_create', $data);
 		}
+	}
+
+
+	public function update($k_menu = null)
+	{
+		//cek proses update dilakukan
+		if ($this->input->post()) {
+			$data = $this->input->post();
+			$result = $this->menu->update($data);
+			if ($result > 0) {
+				$this->session->set_flashdata('msg',template_success_msg("Data Menu Kantin Berhasil diupdate"));
+			}
+			else{
+				$this->session->set_flashdata('msg',template_error_msg("Menu Kantin gagal diupdate"));
+			}
+
+			//redirect
+			redirect(base_url().'index.php/Kantin/get_allKantin');
+
+		}
+		else{
+			//proses mengambil dan menampilkan
+			//data spesifik sesuai dengan data yang diupdate
+			$data['menu'] = $this->menu->get_menu_specific($k_menu);
+			$data['judul'] = 'Update Data Menu Kantin';
+			$this->load->view('kantin/v_update',$data);
+		}
+	}
+
+	public function delete($k_menu)
+	{
+		$result = $this->menu->delete($k_menu);
+
+		if ($result > 0) {
+			$this->session->set_flashdata('msg',template_success_msg("Data Menu Kantin Berhasil delete"));
+		}
+		else{
+			$this->session->set_flashdata('msg',template_error_msg("Menu Kantin gagal didelete"));
+		}
+
+			//redirect
+			redirect(base_url().'index.php/Kantin/get_allKantin');
+
+
 	}
 }
