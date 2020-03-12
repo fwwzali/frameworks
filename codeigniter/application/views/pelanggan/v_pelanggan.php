@@ -164,7 +164,7 @@
                           Edit data
                       </a>
 
-                      <a  class="btn btn-danger">
+                      <a href="<?php echo base_url() ?>index.php/pelanggan/delete/<?php echo $key->npm; ?>" class="btn btn-danger">
                           Delete
                       </a>
                   </td>

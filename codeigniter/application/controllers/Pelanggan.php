@@ -49,21 +49,55 @@ class Pelanggan extends CI_Controller
 			//tampilkan form
 			$data['judul'] = 'Input Data Pelanggan';
 			$this->load->view("pelanggan/v_create",$data);
-	
+			
+
 		}
 	
 	}
 
-	public function edit($npm)
+	public function edit($npm = null)
 	{
 		if ($this->input->post()) {
-			
+			//proses edit data
+			$data = $this->input->post();
+			$status = $this->pelanggan->update($data);
+
+			//pesan gagal/sukses
+			if ($status > 0) {
+				//kirim pesan sukses
+				$this->session->set_flashdata('msg',template_success_msg("Data Pelanggan Berhasil diperbarui"));
+			}
+			else{
+				//pesan error
+				$this->session->set_flashdata('msg',template_error_msg("Data Pelanggan Gagal diperbarui"));
+			}
+
+			redirect(base_url().'index.php/Pelanggan/index');
+
 		}
 		else{
-			$data['pelanggan'] = $this->pelanggan->get_pelanggan_spc($npm);
+			$data['pelanggan'] = $this->pelanggan->get_pelanggan($npm);
 			$data['judul'] = 'Edit Data Pelanggan';
 			$this->load->view('pelanggan/v_update',$data);
 		}
+	}
+
+
+	public function delete($npm)
+	{
+		$status = $this->pelanggan->delete($npm);
+		//pesan gagal/sukses
+		if ($status > 0) {
+			//kirim pesan sukses
+			$this->session->set_flashdata('msg',template_success_msg("Data Pelanggan Berhasil dihapus"));
+		}
+		else{
+			//pesan error
+			$this->session->set_flashdata('msg',template_error_msg("Data Pelanggan Gagal dihapus"));
+		}
+
+		redirect(base_url().'index.php/Pelanggan/index');
+
 	}
 
 

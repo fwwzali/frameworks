@@ -138,7 +138,7 @@
 
       <h2><?php echo $judul; ?></h2>
 
-  <form action="<?php echo base_url() ?>index.php/pelanggan/update/" method="post">
+  <form action="<?php echo base_url() ?>index.php/pelanggan/edit/" method="post">
 
     <?php foreach ($pelanggan as $key ) : ?>
 
