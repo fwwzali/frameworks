@@ -21,5 +21,17 @@ class M_pelanggan extends CI_Model
 		*/
 		//QUERY BUILDER
 		$this->db->insert('pelanggan',$data);
+
+		return $this->db->affected_rows();
+	}
+
+	public function get_pelanggan()
+	{
+		return $this->db->get('pelanggan')->result();
+	}
+
+	public function get_pelanggan_spc($npm)
+	{
+		return $this->db->get_where('pelanggan',array('npm'=>$npm))->result();
 	}
 }
