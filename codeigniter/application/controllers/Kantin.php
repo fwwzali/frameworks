@@ -18,7 +18,7 @@ class Kantin extends CI_Controller
 	{
 		$data['judul'] = "Daftar Warung";
 		$data['warung'] = $this->menu->get_warung();
-		$this->load->view('V_listKantin',$data);
+		$this->template->render('V_listKantin',$data);
 	}
 
 	public function get_allKantin()
@@ -27,7 +27,7 @@ class Kantin extends CI_Controller
 		$data['menu'] = $data_menu;
 		$data['judul'] = "Menu Kantin UPN Jatim";
 		//print_r($data_menu);
-		$this->load->view('V_menu_boots',$data);
+		$this->template->render('V_menu_boots',$data);
 	}
 
 
@@ -58,7 +58,7 @@ class Kantin extends CI_Controller
 		else{
 			//request form input
 			$data['judul'] = "Buat Menu Baru";
-			$this->load->view('kantin/v_create', $data);
+			$this->template->render('kantin/v_create', $data);
 		}
 	}
 
@@ -85,7 +85,7 @@ class Kantin extends CI_Controller
 			//data spesifik sesuai dengan data yang diupdate
 			$data['menu'] = $this->menu->get_menu_specific($k_menu);
 			$data['judul'] = 'Update Data Menu Kantin';
-			$this->load->view('kantin/v_update',$data);
+			$this->template->render('kantin/v_update',$data);
 		}
 	}
 

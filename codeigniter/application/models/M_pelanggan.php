@@ -3,6 +3,8 @@
 /**
  * 
  */
+
+
 class M_pelanggan extends CI_Model
 {
 	

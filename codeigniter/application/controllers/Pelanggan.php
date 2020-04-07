@@ -18,7 +18,7 @@ class Pelanggan extends CI_Controller
 		
 		$data['pelanggan'] = $this->pelanggan->get_pelanggan();
 		$data['judul'] = 'Data Pelanggan';
-		$this->load->view('pelanggan/v_pelanggan',$data);
+		$this->template->render('pelanggan/v_pelanggan',$data);
 
 	}
 
@@ -48,7 +48,7 @@ class Pelanggan extends CI_Controller
 		else{
 			//tampilkan form
 			$data['judul'] = 'Input Data Pelanggan';
-			$this->load->view("pelanggan/v_create",$data);
+			$this->template->render("pelanggan/v_create",$data);
 			
 
 		}
@@ -78,7 +78,7 @@ class Pelanggan extends CI_Controller
 		else{
 			$data['pelanggan'] = $this->pelanggan->get_pelanggan($npm);
 			$data['judul'] = 'Edit Data Pelanggan';
-			$this->load->view('pelanggan/v_update',$data);
+			$this->template->render('pelanggan/v_update',$data);
 		}
 	}
 
